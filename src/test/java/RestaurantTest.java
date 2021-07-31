@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import java.util.*;
 
 import java.time.LocalTime;
 
@@ -86,4 +87,39 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>VIEW TOTAL COST FOR ORDER<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    @Test
+    public void when_no_item_is_selected_from_menu_total_cost_should_be_0(){
+
+        //Arrange
+        List<String> menuItems = new ArrayList<String>();
+
+        //Act
+        int totalCost = restaurant.getTotalCost(menuItems);
+
+        //Assert
+        assertEquals(0,totalCost);
+
+    }
+
+    @Test
+    public void when_multiple_items_selected_from_menu_total_cost_should_be_price_of_all_selected_items_together(){
+
+        //Arrange
+        List<String> menuItems = new ArrayList<String>();
+        menuItems.add("Sweet corn soup");
+        menuItems.add("Vegetable lasagne");
+
+        //Act
+        int totalCost = restaurant.getTotalCost(menuItems);
+
+        //Assert
+        assertEquals(388, totalCost);
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<VIEW TOTAL COST FOR ORDER>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 }
